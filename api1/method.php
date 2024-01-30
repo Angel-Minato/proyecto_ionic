@@ -5,7 +5,7 @@ require "config/Conexion.php";
   switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
       // Consulta SQL para seleccionar datos de la tabla
-$sql = "SELECT curso, metricula, correo, edad FROM alumno";
+$sql = "SELECT nombre, apodo, tel, foto FROM maestro";
 
 $query = $conexion->query($sql);
 
@@ -28,14 +28,14 @@ $conexion->close();
     case 'POST':
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Recibir los datos del formulario HTML
-        $curso = $_POST['curso'];
-        $metricula = $_POST['metricula'];
-        $correo = $_POST['correo'];
-        $edad = $_POST['edad'];
+        $nombre = $_POST['nombre'];
+        $apodo = $_POST['apodo'];
+        $tel = $_POST['tel'];
+        $foto = $_POST['foto'];
      
     
         // Insertar los datos en la tabla
-        $sql = "INSERT INTO alumno (curso, metricula, correo, edad ) VALUES ('$curso', '$metricula','$correo', '$edad')"; // Reemplaza con el curso de tu tabla
+        $sql = "INSERT INTO maestro (nombre, apodo, tel, foto ) VALUES ('$nombre', '$apodo','$tel', '$foto')"; // Reemplaza con el nombre de tu tabla
     
         if ($conexion->query($sql) === TRUE) {
             echo "Datos insertados con éxito.";
@@ -53,25 +53,25 @@ $conexion->close();
         if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
           parse_str(file_get_contents("php://input"), $datos);
       
-          $id_alumno = $datos['id_alumno'];
-          $metricula = $datos['metricula'];
-          $edad = $datos['edad'];
-          $correo = $datos['correo'];
+          $id_maestro = $datos['id_maestro'];
+          $apodo = $datos['apodo'];
+          $foto = $datos['foto'];
+          $tel = $datos['tel'];
       
           if ($_SERVER['REQUEST_METHOD'] === 'PATCH') { // Método PATCH
               $actualizaciones = array();
-              if (!empty($metricula)) {
-                  $actualizaciones[] = "metricula = '$metricula'";
+              if (!empty($apodo)) {
+                  $actualizaciones[] = "apodo = '$apodo'";
               }
-              if (!empty($edad)) {
-                  $actualizaciones[] = "edad = '$edad'";
+              if (!empty($foto)) {
+                  $actualizaciones[] = "foto = '$foto'";
               }
-              if (!empty($correo)) {
-                  $actualizaciones[] = "correo = '$correo'";
+              if (!empty($tel)) {
+                  $actualizaciones[] = "tel = '$tel'";
               }
       
               $actualizaciones_str = implode(', ', $actualizaciones);
-              $sql = "UPDATE alumno SET $actualizaciones_str WHERE id_alumno = $id_alumno";
+              $sql = "UPDATE maestro SET $actualizaciones_str WHERE id_maestro = $id_maestro";
           }
       
           if ($conexion->query($sql) === TRUE) {
@@ -90,17 +90,17 @@ $conexion->close();
         $input = json_decode(file_get_contents("php://input"), true);
 
         // Asegúrate de que los datos necesarios estén presentes
-        if (isset($input['curso']) && isset($input['metricula']) && isset($input['correo']) && isset($input['edad'])) {
-            $curso = $input['curso'];
-            $metricula = $input['metricula'];
-            $correo = $input['correo'];
-            $edad = $input['edad'];
+        if (isset($input['nombre']) && isset($input['apodo']) && isset($input['tel']) && isset($input['foto'])) {
+            $nombre = $input['nombre'];
+            $apodo = $input['apodo'];
+            $tel = $input['tel'];
+            $foto = $input['foto'];
 
-            $sql = "INSERT INTO alumno (curso, metricula, correo, edad) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO maestro (nombre, apodo, tel, foto) VALUES (?, ?, ?, ?)";
             $stmt = $conexion->prepare($sql);
 
             // Enlaza los parámetros y sus tipos
-            $stmt->bind_param("sssi", $curso, $metricula, $correo, $edad);
+            $stmt->bind_param("sssi", $nombre, $apodo, $tel, $foto);
 
             if ($stmt->execute()) {
                 $response = array("message" => "Registro insertado con éxito.");
@@ -127,11 +127,11 @@ $conexion->close();
         
         // Verificar si la solicitud es DELETE
         if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            // Verificar si se proporciona el parámetro id_alumno en el JSON
-            if (isset($data['id_alumno'])) {
+            // Verificar si se proporciona el parámetro id_maestro en el JSON
+            if (isset($data['id_maestro'])) {
                 // Procesar solicitud DELETE
-                $id_alumno = $data['id_alumno'];
-                $sql = "DELETE FROM alumno WHERE id_alumno = $id_alumno";
+                $id_maestro = $data['id_maestro'];
+                $sql = "DELETE FROM maestro WHERE id_maestro = $id_maestro";
         
                 // Realizar la consulta DELETE
                 if ($conexion->query($sql) === TRUE) {
@@ -140,7 +140,7 @@ $conexion->close();
                     echo "Error al eliminar registro: " . $conexion->error;
                 }
             } else {
-                echo "El parámetro id_alumno no se proporcionó en el JSON.";
+                echo "El parámetro id_maestro no se proporcionó en el JSON.";
             }
         } else {
             echo "Método de solicitud no válido.";

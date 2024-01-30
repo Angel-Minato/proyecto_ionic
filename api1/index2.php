@@ -10,7 +10,7 @@
     
     <form id="deleteForm">
         <label for="id_mae">ID del Registro a Eliminar:</label>
-        <input type="text" id="id_mae" name="ID" required>
+        <input type="text" id="id_mae" name="id_maestro" required>
         <button type="button" id="deleteButton">Eliminar</button>
     </form>
 

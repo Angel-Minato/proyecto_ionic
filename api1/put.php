@@ -8,7 +8,7 @@
     
     <form id="updateForm">
         <label for="ID">ID del Registro a Actualizar:</label>
-        <input type="text" id="ID" name="ID" required><br>
+        <input type="text" id="ID" name="id_maestro" required><br>
 
         <label for="apodo">Nuevo Apodo:</label>
         <input type="text" id="apodo" name="apodo"><br>
@@ -41,7 +41,7 @@
             var tel = document.getElementById('tel').value;
 
             var data = new URLSearchParams();
-            data.append('ID', ID);
+            data.append('ID', id_maestro);
             data.append('apodo', apodo);
             data.append('foto', foto);
             data.append('tel', tel);
