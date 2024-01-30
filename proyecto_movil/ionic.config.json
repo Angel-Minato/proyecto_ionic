@@ -1,7 +1,0 @@
-{
-  "name": "proyecto_secreto_movil",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
