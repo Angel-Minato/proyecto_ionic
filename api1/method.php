@@ -1,11 +1,18 @@
 <?php
 require "config/Conexion.php";
 
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE");
+header("Access-Control-Allow-Headers: Content-Type");
+
+
+
   //print_r($_SERVER['REQUEST_METHOD']);
   switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
       // Consulta SQL para seleccionar datos de la tabla
-$sql = "SELECT nombre, apodo, tel, foto FROM maestro";
+$sql = "SELECT id_maestro,nombre, apodo, tel,correo, foto FROM maestro";
 
 $query = $conexion->query($sql);
 
@@ -26,27 +33,51 @@ $conexion->close();
 
 
     case 'POST':
-      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        header('Content-Type: application/json');
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        $nombre_usuario = $data['nombre'];
+        $apodo_usuario = $data['apodo'];
+        $correo_usuario = $data['correo'];
+        $tel_usuario = $data['tel'];
+        $foto_usuario = $data['foto'];
+
+        // Prepara la consulta SQL
+        $stmt = $conexion->prepare("INSERT INTO maestro (nombre, apodo, correo, tel, foto) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $nombre_usuario, $apodo_usuario, $correo_usuario, $tel_usuario, $foto_usuario);
+
+        if ($stmt->execute()) {
+            echo "Datos insertados con éxito.";
+        } else {
+            echo "Error al insertar datos: " . $stmt->error;
+        }
+        $stmt->close();
+        /*
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+       
+        header('Content-Type: application/json');
         // Recibir los datos del formulario HTML
         $nombre = $_POST['nombre'];
         $apodo = $_POST['apodo'];
         $tel = $_POST['tel'];
+        $correo = $_POST['correo'];
         $foto = $_POST['foto'];
      
     
         // Insertar los datos en la tabla
-        $sql = "INSERT INTO maestro (nombre, apodo, tel, foto ) VALUES ('$nombre', '$apodo','$tel', '$foto')"; // Reemplaza con el nombre de tu tabla
+        $sql = "INSERT INTO maestro (nombre, apodo, tel,correo, foto ) VALUES ('$nombre', '$apodo','$tel','$correo', '$foto')"; // Reemplaza con el nombre de tu tabla
     
         if ($conexion->query($sql) === TRUE) {
             echo "Datos insertados con éxito.";
         } else {
             echo "Error al insertar datos: " . $conexion->error;
         }
-    } else {
-        echo "Esta API solo admite solicitudes POST.";
-    }
-    
-    $conexion->close();
+        } else {
+            echo "Esta API solo admite solicitudes POST.";
+        }
+
+        $conexion->close();
+        */
       break;
 
       case 'PATCH':
