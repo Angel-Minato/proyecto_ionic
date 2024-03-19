@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
   public apiUrl = 'http://127.0.0.1:80/api1/method.php'; // Reemplaza con la URL de tu API
+  public apiUser ='';
 
   constructor(private http: HttpClient) {}
 
