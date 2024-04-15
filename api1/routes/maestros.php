@@ -1,11 +1,9 @@
 <?php
-require "config/Conexion.php";
-
-
+require "../config/Conexion.php";
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");
-
+header('Content-Type: application/json');
 
 
   //print_r($_SERVER['REQUEST_METHOD']);
