@@ -90,6 +90,10 @@ export class ApiService {
     };
     return this.http.post<any>(this.apiUser, credentials);
   }
+    // Método para guardar los datos del usuario
+    saveUserData(user: Yuser): Observable<any> {
+      return this.http.post<any>(this.apiUser, user);
+    }
 }
 
 

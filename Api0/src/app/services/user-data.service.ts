@@ -1,3 +1,4 @@
+// user-data.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,8 +7,7 @@ import { Injectable } from '@angular/core';
 export class UserDataService {
   constructor() { }
 
-  setUserData(id: number, nombre: string, correo: string, contrasena: string) {
-    sessionStorage.setItem('id', id.toString());
+  setUserData(nombre: string, correo: string, contrasena: string) {
     sessionStorage.setItem('nombre', nombre);
     sessionStorage.setItem('correo', correo);
     sessionStorage.setItem('contrasena', contrasena);
