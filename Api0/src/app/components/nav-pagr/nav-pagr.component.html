@@ -1,3 +1,43 @@
-<p>
-  nav-pagr works!
-</p>
+<!-- app.component.html -->
+<ion-header>
+  <ion-toolbar class="alinear_nav">
+    <div class="align_name_icon">
+      <img src="../../assets/img/logo.png" width="35px" height="45px" style="margin: 5px;">
+      <ion-title>Mango</ion-title>
+    </div>
+    <ion-buttons slot="end">
+      <ng-container *ngIf="correo; else loginRegisterButtons">
+        <ion-icon name="person-circle-outline" id="open-custom-dialog" size="large"></ion-icon>
+        <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+          <ng-template>
+            <h1>Bienvenido</h1>
+            <span style="font-size: 17px;">{{correo}}</span>
+            <ion-button class="btn_cerrarsesion" (click)="modal.dismiss(); logout()">Cerrar sesión</ion-button>
+          </ng-template>
+        </ion-modal>
+      </ng-container>
+      <ng-template #loginRegisterButtons>
+        <ion-menu-button></ion-menu-button>
+      </ng-template>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <p> <a href="/login">Iniciar sesión</a></p>
+      <ion-item routerLink="/registrar">Registrar</ion-item>
+      <!-- Agrega aquí más elementos -->
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main-content"></ion-router-outlet>
+
+

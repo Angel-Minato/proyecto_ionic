@@ -8,6 +8,6 @@ import { EjemploComponent } from './ejemplo.component';
   imports: [
     CommonModule
   ],
-  exports:[EjemploComponent]
+  exports:[]
 })
 export class EjemploModule { }

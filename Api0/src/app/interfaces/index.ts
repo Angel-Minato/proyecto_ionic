@@ -8,3 +8,21 @@ export interface TopLevel {
     tel?:       string;
     foto?:      string;
 }
+
+export interface Comics {
+    comic_id?: number,
+    portada?: string;
+    titulo?: string;
+    descripcion?: string;
+    fecha_publicacion?: string,
+    genero?: string
+
+  }
+
+  export interface Yuser{
+    id?: number,
+    nombre?: string,
+    correo?: string,
+    contrasena?: string
+  }
+  

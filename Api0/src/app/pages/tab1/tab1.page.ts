@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 //import { TopLevel } from '../../interfaces';
-import { TopLevel } from '../../interfaces';
+//import { TopLevel } from '../../interfaces';
+import {Comics} from '../../interfaces';
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +10,7 @@ import { TopLevel } from '../../interfaces';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  public resp: TopLevel[] = [];
+  public resp: Comics[] = [];
 
 
   constructor(private apiService: ApiService ) {}
@@ -18,7 +19,7 @@ export class Tab1Page implements OnInit {
     this.loadTopHeadlines();
   }
   loadTopHeadlines() {
-    this.apiService.getTopHeadlines()
+    this.apiService.getComics()
     .subscribe(resp => {
       console.log(resp); // Imprime el objeto TopLevel o arreglo TopLevel en la consola
       if (Array.isArray(resp)) {
@@ -51,7 +52,7 @@ export class Tab1Page implements OnInit {
         }
       });
   }
-*/
+
 
   deleteItem(id_maestro: number) {
     this.apiService.deleteDato(id_maestro).subscribe(
@@ -64,4 +65,5 @@ export class Tab1Page implements OnInit {
       }
     );
     }
+    */
 }
