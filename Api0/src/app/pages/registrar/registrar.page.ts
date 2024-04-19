@@ -73,4 +73,9 @@ export class RegistrarPage {
   navigateToLogin() {
     this.router.navigate(['/login']); 
   }
+
+  back(){
+    this.router.navigate(['/tabs/tab1'])
+  }
+  
 }

@@ -13,41 +13,20 @@
       <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-ejemplo></app-ejemplo>
+  <h1>historias</h1>
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let comic of resp">
+      <ion-item *ngFor="let comic of resp" (click)="verDetalles($event, comic)">
         <ion-thumbnail slot="start">
           <img [src]="comic.portada" alt="Portada del cómic">
         </ion-thumbnail>
         <ion-label>
           <h2>{{ comic.titulo }}</h2>
+          <p>{{comic.comic_id}}</p>
           <p *ngIf="comic.descripcion">{{ comic.descripcion | slice:0:100 }}{{comic.descripcion.length > 100 ? '...' : ''}}</p>
         </ion-label>
       </ion-item>
     </ion-list>
   </ion-content>
-    
-  <!--ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let item of resp">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{ item.nombre }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Tel: {{ item.tel }}</p>
-            <p>Correo: {{ item.correo }}</p>
-            <p>Foto: {{ item.foto }}</p>
-            <p>ID: {{ item.id_maestro }}</p>
-          </ion-card-content> 
-          <!-- Aquí cerré la etiqueta <ion-card-content> ->
-          <ion-button *ngIf="item.id_maestro !== undefined" (click)="deleteItem(item.id_maestro)">Eliminar</ion-button>
-          <ion-button>Eliminar</ion-button>
-        </ion-card> <!-- Aquí cerré la etiqueta <ion-card> ->
-      </ion-col>
-    </ion-row>
-  </ion-grid-->
 </ion-content>
 

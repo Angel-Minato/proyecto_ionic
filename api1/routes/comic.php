@@ -6,18 +6,35 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        $sql = "SELECT comic_id, titulo, descripcion, fecha_publicacion, genero, portada FROM Comic";
-        $query = $conexion->query($sql);
-
-        if ($query->num_rows > 0) {
-            $data = array();
-            while ($row = $query->fetch_assoc()) {
-                $data[] = $row;
+        if (isset($_GET['id'])) {
+            // Si se proporcionó un ID, selecciona el cómic con ese ID
+            $id = $_GET['id'];
+            $stmt = $conexion->prepare("SELECT * FROM Comic WHERE comic_id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $data = $result->fetch_assoc();
+                header('Content-Type: application/json');
+                echo json_encode($data);
+            } else {
+                echo "No se encontró un cómic con ese ID.";
             }
-            header('Content-Type: application/json');
-            echo json_encode($data);
+            $stmt->close();
         } else {
-            echo "No se encontraron registros en la tabla.";
+            // Si no se proporcionó un ID, selecciona todos los cómics
+            $sql = "SELECT * FROM Comic";
+            $query = $conexion->query($sql);
+            if ($query->num_rows > 0) {
+                $data = array();
+                while ($row = $query->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                header('Content-Type: application/json');
+                echo json_encode($data);
+            } else {
+                echo "No se encontraron registros en la tabla.";
+            }
         }
         $conexion->close();
         break;

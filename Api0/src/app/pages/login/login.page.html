@@ -1,4 +1,11 @@
 <!--app-login-component></app-login-component-->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<p class="message"><a (click)="back()" >Regresar</a></p>
 
 <div class="login-page">
   <div class="form">
@@ -11,6 +18,6 @@
       </div>
       <button type="submit" class="iniciar_sesion">Inicia sesion</button>
     </form>
-    <p class="message">¿No tienes una cuenta? <a href="/register">Regístrate aquí</a></p>
+    <p class="message">¿No tienes una cuenta? <a (click)="navigateToRegister()" >Regístrate aquí</a></p>
   </div>
 </div>

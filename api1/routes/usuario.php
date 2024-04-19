@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        $sql = "SELECT id, nombre, correo FROM usuario";
+        $sql = "SELECT id, nombre, correo,contrasena FROM usuario";
         $query = $conexion->query($sql);
 
         if ($query->num_rows > 0) {
@@ -25,7 +25,7 @@ switch($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         $data = json_decode(file_get_contents("php://input"), true);
     
-        $camposRequeridos = ['nombre', 'correo', 'contraseña'];
+        $camposRequeridos = ['nombre', 'correo', 'contrasena'];
         $camposFaltantes = [];
     
         foreach ($camposRequeridos as $campo) {
@@ -41,7 +41,7 @@ switch($_SERVER['REQUEST_METHOD']) {
     
         $nombre = $data['nombre'];
         $correo = $data['correo'];
-        $contraseña = $data['contraseña'];
+        $contraseña = $data['contrasena'];
     
         $stmt = $conexion->prepare("INSERT INTO usuario (nombre, correo, contrasena) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $nombre, $correo, $contraseña);

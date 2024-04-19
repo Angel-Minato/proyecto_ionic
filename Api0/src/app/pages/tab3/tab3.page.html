@@ -1,17 +1,36 @@
-<ion-header [translucent]="true">
+<!--ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Tab 3
     </ion-title>
   </ion-toolbar>
-</ion-header>
-
+</ion-header-->
+<!-- tab3.page.html -->
+<app-nav-pagr></app-nav-pagr>
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Perfil</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-content>
+    <ion-card *ngIf="isLoggedIn">
+      <ion-card-header>
+        <ion-card-title>{{nombre}}</ion-card-title>
+        <ion-card-subtitle>Lector</ion-card-subtitle>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-avatar>
+          <img src="https://i.pinimg.com/736x/7f/15/5a/7f155a9f7397627b66f9e8a8cde75b8d.jpg" />
+        </ion-avatar>
+        <p>ID: {{id}}</p>
+        <p>Correo: {{correo}}</p>
+      </ion-card-content>
+    </ion-card>
+    <div class="center-button" *ngIf="!isLoggedIn">
+      <h3>no hay sesion activa inicie sesion</h3>
+      <button class="login-button" (click)="navigateToLogin()">Iniciar sesión</button>
+    </div>
+  </ion-content>
 </ion-content>

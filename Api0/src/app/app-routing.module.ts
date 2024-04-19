@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'registrar',
     loadChildren: () => import('./pages/registrar/registrar.module').then( m => m.RegistrarPageModule)
+  },
+  {
+    path: 'vista-comic/:id',
+    loadChildren: () => import('./pages/vista-comic/vista-comic.module').then( m => m.VistaComicPageModule)
   }
 ];
 @NgModule({

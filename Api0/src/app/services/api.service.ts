@@ -23,6 +23,14 @@ export class ApiService {
       map(resp => resp)
     );
   }
+  
+    // Método para obtener los detalles de un cómic por ID
+    getComicDetails(id: number): Observable<Comics> {
+      const url = `${this.apiComics}?id=${id}`;
+      return this.http.get<Comics>(url).pipe(
+        map(resp => resp)
+      );
+    }
 
   // Método para enviar datos por POST
   postComic(comic: any): Observable<any> {

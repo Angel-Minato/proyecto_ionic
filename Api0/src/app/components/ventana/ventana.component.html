@@ -1,0 +1,15 @@
+<!-- comic-details-modal.component.html -->
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">{{ comic.titulo }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content class="ion-text-center">
+      <ion-img [src]="comic.portada" alt="Portada del cómic"></ion-img>
+      <p *ngIf="comic.descripcion">{{ comic.descripcion | slice:0:100 }}{{comic.descripcion.length > 100 ? '...' : ''}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full" (click)="verPagina()">Ver página del cómic</ion-button>
+</ion-content>

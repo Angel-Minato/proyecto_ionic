@@ -1,0 +1,66 @@
+// profile.page.scss
+ion-card {
+  width: 95%;
+  margin: auto;
+  text-align: center;
+
+  ion-card-header {
+    ion-card-subtitle {
+      font-size: 1em;
+      color: gray;
+    }
+
+    ion-card-title {
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+
+  ion-card-content {
+    ion-avatar {
+      width: 150px;
+      height: 150px;
+      margin: auto;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    p {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+  }
+}
+
+.center-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+.login-button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 50%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.login-button:hover,
+.login-button:active,
+.login-button:focus {
+  background: #43A047;
+}

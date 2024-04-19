@@ -51,10 +51,14 @@ export class LoginPage {
   }
 
   navigateToRegister() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/registrar']);
   }
 
   gotoSignup() {
     this.navCntrl.navigateForward('signup');
+  }
+
+  back(){
+    this.router.navigate(['/tabs/tab1'])
   }
 }
